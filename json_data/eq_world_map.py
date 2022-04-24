@@ -1,5 +1,3 @@
-import json
-from pprint import pprint
 from plotly.graph_objs import Scattergeo, Layout
 from plotly import offline
 import requests
