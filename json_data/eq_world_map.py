@@ -18,6 +18,7 @@ for eq in all_eq_dicts:
     longs.append(eq['geometry']['coordinates'][0])
     hover_texts.append(eq['properties']['title'])
 
+#defines data sets, scatter map, the lats and longs, hover text. Marker makes the plots bigger for each mag, and sets a color gradiant
 data = [{
     'type': 'scattergeo', 
     'lon': longs, 
@@ -32,7 +33,9 @@ data = [{
     },
 }]
 
+#creates a layout
 my_layout = Layout(title='Global Earthquakes')
 
+#creates a figure with the layout and data parameters. then plots
 fig = {'data': data, 'layout': my_layout}
 offline.plot(fig, filename = 'global_earthquakes.html')
