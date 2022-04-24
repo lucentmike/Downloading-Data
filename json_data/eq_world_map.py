@@ -2,18 +2,19 @@ import json
 from pprint import pprint
 from plotly.graph_objs import Scattergeo, Layout
 from plotly import offline
+import requests
 
-filename = 'json_data/eq_data_30_day_m1.json'
-with open(filename) as f:
-    all_eq_data = json.load(f)
+
+data =  requests.get('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson')
+eq_data = data.json()
 
 #filter out dictonarys for each earthqule and the magnitudes
-all_eq_dicts = all_eq_data['features']
+all_eq_dicts = eq_data['features']
 mags, lats, longs, hover_texts = [], [], [], []
 
 #sort through the earthquake dictonaries and pull the magnitues, lats and longs
 for eq in all_eq_dicts:
-    mags.append(eq['properties']['mag'])
+    mags.append(int(eq['properties']['mag']))
     lats.append(eq['geometry']['coordinates'][1])
     longs.append(eq['geometry']['coordinates'][0])
     hover_texts.append(eq['properties']['title'])
